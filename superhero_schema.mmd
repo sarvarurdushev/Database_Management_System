@@ -1,0 +1,35 @@
+
+erDiagram
+    Teams {
+        INTEGER TeamID PK
+        TEXT TeamName
+        TEXT Specialty
+    }
+    Heroes {
+        INTEGER HeroID PK
+        TEXT Name
+        TEXT Alias
+        INTEGER PowerLevel
+        INTEGER TeamID FK
+    }
+    Missions {
+        INTEGER MissionID PK
+        TEXT MissionName
+        INTEGER Difficulty
+        INTEGER TeamID FK
+        TEXT Status
+        DATE Date
+        REAL TotalHoursWorked
+    }
+    Assignments {
+        INTEGER AssignmentID PK
+        INTEGER HeroID FK
+        INTEGER MissionID FK
+        REAL HoursSpent
+        TEXT Outcome
+    }
+
+    Teams ||--o{ Heroes : has
+    Teams ||--o{ Missions : assigns
+    Heroes ||--o{ Assignments : participates_in
+    Missions ||--o{ Assignments : includes
